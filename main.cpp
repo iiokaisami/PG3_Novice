@@ -1,5 +1,7 @@
 #include <Novice.h>
 
+#include "StageScene.h"
+
 const char kWindowTitle[] = "LC1B_02_イイオカ_イサミ_PG3";
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -7,6 +9,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
+
+	StageScene* pStageScene = new StageScene();
+	pStageScene->Init();
 
 
 	// キー入力結果を受け取る箱
@@ -26,6 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 		
+		pStageScene->Update();
 
 		///
 		/// ↑更新処理ここまで
@@ -35,6 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
+		pStageScene->Draw();
 	
 		///
 		/// ↑描画処理ここまで
@@ -48,6 +55,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 	}
+
+	delete pStageScene;
 
 	// ライブラリの終了
 	Novice::Finalize();
