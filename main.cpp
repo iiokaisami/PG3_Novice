@@ -1,6 +1,6 @@
 #include <Novice.h>
 
-
+#include "GameManager.h"
 
 const char kWindowTitle[] = "LC1B_02_イイオカ_イサミ_PG3";
 
@@ -10,6 +10,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
 
+	GameManager* game = new GameManager();
+	
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
@@ -28,6 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 		
+		game->Run();
 
 		///
 		/// ↑更新処理ここまで
@@ -50,6 +53,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		}
 	}
+
+	delete game;
 
 	// ライブラリの終了
 	Novice::Finalize();
