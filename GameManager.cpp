@@ -21,7 +21,7 @@ int GameManager::Run()
 
 	if (preSceneNo_ != currentSceneNo_)
 	{
-		sceneArr_[preSceneNo_]->Initialize();
+		sceneArr_[currentSceneNo_]->Initialize();
 	}
 
 	sceneArr_[currentSceneNo_]->Update();

@@ -1,7 +1,8 @@
 #pragma once
 
+#include <Novice.h>
+
 #include "IScene.h"
-#include "InputManager.h"
 
 class TitleScene : public IScene
 {
@@ -13,7 +14,6 @@ public:
 
 private:
 
-	
 
 };
 

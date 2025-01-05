@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Novice.h>
+
 #include "IScene.h"
 
 class ClearScene : public IScene

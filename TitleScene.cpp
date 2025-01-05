@@ -7,17 +7,16 @@ void TitleScene::Initialize()
 
 void TitleScene::Update()
 {
-	//auto& inputManager = InputManager::GetInstance();
-
-	/*if (inputManager.TriggerKey(DIK_SPACE))
+	
+	if (Novice::CheckHitKey(DIK_RETURN))
 	{
 		sceneNo = STAGE;
 	}
-
-	inputManager.UpdateKeyState(DIK_SPACE, false);*/
 }
 
 void TitleScene::Draw()
 {
-	//Novice::ScreenPrintf(0, 0, "Title");
+	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
+	Novice::ScreenPrintf(600, 500, "START ENTER");
+	Novice::ScreenPrintf(0, 0, "Title");
 }
