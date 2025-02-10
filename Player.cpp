@@ -5,6 +5,12 @@ void Player::Initialize()
 	pos_ = { 600.0f, 500.0f };
 	size_ = { 32.0f, 32.0f };
 	speed_ = { 5.0f, 5.0f };
+
+	for (int i = 0; i < 5; i++)
+	{
+		bullets_[i] = std::make_unique<PlayerBullet>();
+		bullets_[i]->Initialize({ pos_.x + size_.x / 2, pos_.y + size_.y / 2 });
+	}
 }
 
 void Player::Update()
@@ -28,8 +34,10 @@ void Player::Update()
 
 	Fire();
 
-	for (PlayerBullet* bullet : bullets_) {
-		bullet->Update();
+	for (int i = 0; i < 5; i++)
+	{
+		bullets_[i]->Update();
+		bulletPos_[i] = bullets_[i]->GetPos();
 	}
 }
 
@@ -37,27 +45,32 @@ void Player::Draw()
 {
 	Novice::DrawBox((int)pos_.x, (int)pos_.y, (int)size_.x,(int)size_.y, 0.0f, WHITE, kFillModeSolid);
 
-	for (PlayerBullet* bullet : bullets_) {
-		bullet->Draw();
+	for (int i = 0; i < 5; i++)
+	{
+		bullets_[i]->Draw();
 	}
 }
 
 void Player::Fire()
 {
-	if (Novice::CheckHitKey(DIK_SPACE))
+	countCoolDownFrame_--;
+
+	if (countCoolDownFrame_ <= 0)
 	{
-		if (countCoolDownFrame_ <= 0)
+		if (Novice::CheckHitKey(DIK_SPACE))
 		{
-			PlayerBullet* newBullet = new PlayerBullet();
-			newBullet->Initialize({ pos_.x + size_.x / 2, pos_.y + size_.y / 2 });
+			for (int i = 0; i < 5; i++)
+			{
+				if (bullets_[i]->IsDead())
+				{
+					bullets_[i]->SetIsDead(false);
+					bullets_[i]->SetPos({ pos_.x + size_.x / 2, pos_.y + size_.y / 2 });
+					bulletSize_[i] = bullets_[i]->GetSize();
+					countCoolDownFrame_ = kShootCoolDownFrame_;
 
-			bullets_.push_back(newBullet);
-		
-			bulletSize_ = newBullet->GetSize();
-
-			countCoolDownFrame_ = kShootCoolDownFrame_;
+					break;
+				}
+			}
 		}
 	}
-
-	countCoolDownFrame_--;
 }

@@ -2,7 +2,7 @@
 
 #include <Novice.h>	
 #include <Vector2.h>
-#include <list>
+#include <memory>
 
 #include "PlayerBullet.h"
 
@@ -16,11 +16,11 @@ public:
 
 	void Fire();
 
-	const std::list<PlayerBullet*>& GetBullets() const { return bullets_; }
-
 public:
 
-	Vector2 GetBulletSize() { return bulletSize_; }
+    Vector2 GetBulletSize() { return bulletSize_[0]; }
+
+	Vector2 bulletPos_[5];
 
 private:
 
@@ -28,13 +28,11 @@ private:
 	Vector2 size_;
 	Vector2 speed_;
 
-	std::list<PlayerBullet*> bullets_;
-	Vector2 bulletSize_;
+	std::unique_ptr<PlayerBullet> bullets_[5];
+	Vector2 bulletSize_[5];
 
-	bool isAttack_ = false;
-	const int kShootCoolDownFrame_ = 15;
+	const int kShootCoolDownFrame_ = 30;
 	int countCoolDownFrame_ = 0;
-
 
 };
 

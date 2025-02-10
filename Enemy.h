@@ -15,6 +15,11 @@ public:
 
 	bool IsDead() { return isDead_; }
 	Vector2 const GetSize() { return size_; }
+	Vector2 const GetPos() { return pos_; }
+
+public:
+
+	void SetIsDead(bool _isDead) { isDead_ = _isDead; }
 
 private:
 

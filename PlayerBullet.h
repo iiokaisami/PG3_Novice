@@ -13,12 +13,14 @@ public:
 
 public:
 
+	Vector2 GetPos() { return pos_; }
 	bool IsDead() { return isDead_; }
 	Vector2 GetSize() { return rad_; }
 
 public:
 
-	void SetIsDead() { isDead_ = true; }
+	void SetPos(Vector2 _pos) { pos_ = _pos; }
+	void SetIsDead(bool  _isDead) { isDead_ = _isDead; }
 
 private:
 
@@ -26,8 +28,9 @@ private:
 	Vector2 rad_;
 	Vector2 speed_;
 
-	static const int kLifeTime = 60 * 4;
+	static const int kLifeTime = 30;
 	int deathTimer_ = kLifeTime;
-	bool isDead_ = false;
+	bool isDead_ = true;
+	
 };
 
